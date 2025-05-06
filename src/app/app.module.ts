@@ -1,8 +1,23 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
+// Configuration des routes
+const routes: Routes = [
+  { 
+    path: 'login', 
+    loadComponent: () => import('./auth/login/login.component').then(m => m.LoginComponent) 
+  },
+  { 
+    path: 'signup', 
+    loadComponent: () => import('./auth/signup/signup.component').then(m => m.SignupComponent) 
+  },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '**', redirectTo: 'login' }
+];
 
 @NgModule({
   declarations: [
@@ -10,11 +25,11 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule.forRoot(routes)
   ],
-  providers: [
-    provideClientHydration(withEventReplay())
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

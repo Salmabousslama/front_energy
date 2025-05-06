@@ -1,0 +1,53 @@
+<div class="auth-container">
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <h1>Création de compte</h1>
+    
+    <div class="form-group">
+      <input type="text" formControlName="firstName" placeholder="Prénom">
+      <div *ngIf="signupForm.get('firstName')?.invalid && signupForm.get('firstName')?.touched" class="error">
+        Prénom requis
+      </div>
+    </div>
+
+    <div class="form-group">
+      <input type="text" formControlName="lastName" placeholder="Nom">
+      <div *ngIf="signupForm.get('lastName')?.invalid && signupForm.get('lastName')?.touched" class="error">
+        Nom requis
+      </div>
+    </div>
+
+    <div class="form-group">
+      <input type="email" formControlName="email" placeholder="Email">
+      <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched" class="error">
+        Email invalide
+      </div>
+    </div>
+
+    <div class="form-group">
+      <input type="text" formControlName="cin" placeholder="CIN">
+      <div *ngIf="signupForm.get('cin')?.invalid && signupForm.get('cin')?.touched" class="error">
+        CIN requis
+      </div>
+    </div>
+
+    <div class="form-group">
+      <input type="tel" formControlName="phone" placeholder="Téléphone">
+      <div *ngIf="signupForm.get('phone')?.invalid && signupForm.get('phone')?.touched" class="error">
+        Téléphone requis
+      </div>
+    </div>
+
+    <div class="form-group">
+      <input type="password" formControlName="password" placeholder="Mot de passe">
+      <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched" class="error">
+        Mot de passe requis
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="signupForm.invalid">S'inscrire</button>
+
+    <p class="auth-link">
+      Déjà un compte ? <a routerLink="/login">Se connecter</a>
+    </p>
+  </form>
+</div>
